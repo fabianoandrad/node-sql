@@ -1,8 +1,8 @@
-import { db } from "../../../database/db";
+import { db } from "../../../database/db.js";
 
 export async function createUser(request, reply){
     try{
-        const {name, eamil} = request.body;
+        const {name, email} = request.body;
 
         db.run(
             `INSERT INTO users (name, email) VALUES (?, ?)`, [name, email]
@@ -14,7 +14,7 @@ export async function createUser(request, reply){
     }catch(error){
         if(error){
             return reply.status(500).send({
-                message: 'Ocorreu um erro ao tentar criar o usuário!'
+                message: 'Ocorreu um erro ao tentar criar o usuário!' + error.message
             });
         }
     }
